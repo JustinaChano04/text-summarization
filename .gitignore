@@ -1,3 +1,3 @@
-pytorch_model-00001-of-00003.bin
-pytorch_model-00002-of-00003.bin
-pytorch_model-00003-of-00003.bin
+/model/
+config.py
+response.json
