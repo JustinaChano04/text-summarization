@@ -1,5 +1,5 @@
 {
-  "_name_or_path": "tiiuae/falcon-7b-instruct",
+  "_name_or_path": "/home/justinchanchan8/text-summarization",
   "alibi": false,
   "apply_residual_connection_post_layernorm": false,
   "architectures": [
