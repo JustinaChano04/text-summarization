@@ -3,24 +3,44 @@ import json
 import config
 
 
-if __name__ == "__main__":
-    method = "post"
+
+
+def get_articles(articleCount, keyword):
     url = "http://eventregistry.org/api/v1/article/getArticles"
     headers = {
         'Content-Type': 'application/json',
     }
     body = {
-        "keyword": "Finance, Market, Technology",
-        "articleCount": 5,
+        "action": "getArticles",
+        "keyword": keyword,
+        "articlesCount": articleCount,
         "apiKey": config.api_key
     }
 
-    r = requests.request(method, url, headers=headers, data=json.dumps(body))
+    r = requests.request('post', url, headers=headers, data=json.dumps(body))
+    
     if r.status_code == 200:
-        x = r.json()
-        print(x)
-        with open('response.json', 'w') as outf:
-            json.dump(x, outf)
+        result = r.json()
+        article_list = []
+        for text in result['articles']['results']:
+            art_dict = {}
+            art_dict['title'] = text['title']
+            art_dict['body'] = text['body']
+            article_list.append(art_dict)
+        return article_list
+    else:
+        return {
+                'message': r.status_code
+            }
+
+if __name__ == "__main__":
+    
+    ret = get_articles(3, "Finance, Technology")
+
+        
+    
+    # for i in x["articles"]["results"]:
+    #     print(i["uri"])
 
 
    
