@@ -12,4 +12,9 @@ ROOT = os.getcwd()
 def load_model():
     pass
 
+def prompt_model(article_list):
+    pass
+
+
+
 
