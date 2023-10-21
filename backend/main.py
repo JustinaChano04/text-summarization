@@ -34,10 +34,10 @@ def get_articles(articleCount, keyword):
                 'message': r.status_code
             }
 
-if __name__ == "__main__":
+# if __name__ == "__main__":
     
-    # ret = get_articles(3, "Finance, Technology")
-    app = FastAPI()
+#     ret = get_articles(3, "Finance, Technology")
+#     # app = FastAPI()
         
 
 
