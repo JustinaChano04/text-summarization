@@ -1,6 +1,7 @@
 import requests
 import json
 import config
+from fastapi import FastAPI
 
 
 
@@ -35,12 +36,9 @@ def get_articles(articleCount, keyword):
 
 if __name__ == "__main__":
     
-    ret = get_articles(3, "Finance, Technology")
-
+    # ret = get_articles(3, "Finance, Technology")
+    app = FastAPI()
         
-    
-    # for i in x["articles"]["results"]:
-    #     print(i["uri"])
 
 
    
