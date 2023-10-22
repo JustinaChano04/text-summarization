@@ -18,8 +18,8 @@ app.add_middleware(
 
 @app.get("/load_articles")
 async def root():
-    articles = get_articles(3, "Finance, Technology")
-    return {"message": articles}, 200
+    articles = get_articles(3, "Finance, Technology") 
+    return articles
 
 
 if __name__ == "__main__":
