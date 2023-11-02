@@ -1,0 +1,10 @@
+Summary:
+In Wyoming, a proposed 29% electricity price hike by the state's largest utility, Rocky Mountain Power, has sparked controversy. While residents blame renewable energy projects, the utility points to rising fuel prices as the cause. This issue reflects a broader trend of increasing electricity prices in the U.S. due to factors like inflation, drought, and global supply shortages. The debate centers on the economic impact, particularly on fixed-income households. Regulators are now reviewing the proposed increases, which would impact residential customers.
+
+VOCAB:
+
+Renewable power: Electricity generated from naturally replenishing sources like wind and solar.
+Inflation: A general increase in prices, reducing the purchasing power of currency.
+Fixed income: A financial situation where income remains relatively constant, often pertaining to retirees or those on a fixed pension.
+Utility bill: A regular charge for services like electricity, water, or gas.
+Regulators: Government agencies responsible for overseeing and controlling various aspects of industries, including utilities.

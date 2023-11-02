@@ -1,9 +1,8 @@
-// import "./App.css";
 import { useState, useEffect } from "react";
 
-
 function GetArticles(url) {
-  const [user, setPosts] = useState([]);
+  const [article, setPosts1] = useState([]);
+  const [terms, setPosts2] = useState([]);
   useEffect(() => {
     fetch(url)
       .then((response) => {
@@ -13,12 +12,10 @@ function GetArticles(url) {
         return response.json();
       })
       .then((data) => {
-        // console.log(data);
-        setPosts(data);
+        setPosts1(data[0]);
+        setPosts2(data[1]);
       });
-      
-  }, []);  
-  console.log("user", user) ;
-  return (user);
-};
+  }, []);
+  return {article,terms};
+}
 export default GetArticles;
