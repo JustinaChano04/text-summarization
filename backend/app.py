@@ -1,10 +1,10 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from main import get_articles, parse_answer
 import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
-app = FastAPI()
+app =  FastAPI(swagger_ui_parameters={"syntaxHighlight": False})
 origins = [
     "http://localhost:3000",
 ]
@@ -16,8 +16,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-class word(BaseModel):
-    data: str
 
 
 @app.get("/load_articles")
@@ -26,9 +24,11 @@ async def root():
     summary, definitions = parse_answer()
     return articles, definitions
 
-@app.post("/post_vocab")
-async def post_vocab():
-    print('1')
+@app.post("/post_vocab/")
+async def post_vocab(request: Request):
+    data = await request.json()
+    print(data)
+    return data
 
 
 
