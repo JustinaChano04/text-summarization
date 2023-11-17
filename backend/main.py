@@ -46,6 +46,7 @@ def parse_answer():
         word, definition = term.split(":")
         term_dict["title"] = word
         term_dict["body"] = definition
+        # term_dict['words'] = {'a': 'a', 'b': 'b', 'c':'c'}
         def_dict.append(term_dict)
 
     return sample_response[:vocab_index], def_dict
