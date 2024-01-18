@@ -23,7 +23,7 @@ function Article(url) {
           </div>
         ))};
       </ul>
-      {/* <ul>
+      {<ul>
         {terms.map((arr2) => (
           <div>
             <p>
@@ -31,7 +31,7 @@ function Article(url) {
             </p>
           </div>
         ))}
-      </ul> */}
+      </ul>}
     </div>
   );
 }
