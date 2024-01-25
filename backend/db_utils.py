@@ -2,7 +2,7 @@ from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 import pdb
 
-
+uri = "mongodb+srv://justinachano:FIdSnUd5r4Aa2Zbk@cluster0.wtwtvbz.mongodb.net/?retryWrites=true&w=majority"
 
 # Create a new client and connect to the server
 client = MongoClient(uri, server_api=ServerApi('1'))
@@ -16,16 +16,17 @@ try:
     print("Pinged your deployment. You successfully connected to MongoDB!")
 except Exception as e:
     print(e)
-
-
-def db_insert(word):
-    record={
-        'word': 'turn',
-        'definition': "f;lasdjfsdakl;fjdas;fsad"
-    }
-    rec = vocab_table.insert_one(record)
-
     
-if __name__ == "__main__":
-    # db_create()
-    db_insert('word')
+# inserting new vocabulary into the database
+def db_insert(word):    
+    rec = vocab_table.replace_one(word, word, upsert=True)
+
+# retrieve all vocabulary from the database  
+def db_retrieve_all():
+
+    all_cursors = vocab_table.find()
+    return all_cursors
+ 
+# if __name__ == "__main__":
+#     db_insert('word')
+#     a = db_retrieve_all()
