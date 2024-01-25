@@ -2,8 +2,9 @@ from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 import pdb
 
-uri = "mongodb+srv://justinachano:FIdSnUd5r4Aa2Zbk@cluster0.wtwtvbz.mongodb.net/?retryWrites=true&w=majority"
 
+url = open('db_link.txt', 'r')
+uri = url.read()
 # Create a new client and connect to the server
 client = MongoClient(uri, server_api=ServerApi('1'))
 my_db = client['financial_terms']
@@ -16,14 +17,15 @@ try:
     print("Pinged your deployment. You successfully connected to MongoDB!")
 except Exception as e:
     print(e)
-    
+
+url.close()
+
 # inserting new vocabulary into the database
 def db_insert(word):    
     rec = vocab_table.replace_one(word, word, upsert=True)
 
 # retrieve all vocabulary from the database  
 def db_retrieve_all():
-
     all_cursors = vocab_table.find()
     return all_cursors
  
