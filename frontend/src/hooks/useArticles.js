@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-function GetArticles(url) {
+function useArticles(url) {
   const [article, setPosts1] = useState([]);
   const [terms, setPosts2] = useState([]);
   useEffect(() => {
@@ -18,4 +18,4 @@ function GetArticles(url) {
   }, []);
   return {article,terms};
 }
-export default GetArticles;
+export default useArticles;

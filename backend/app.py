@@ -33,9 +33,7 @@ async def root():
 @app.post("/store_vocab/")
 async def post_vocab(request: Request):
     data = await request.json()
-
     # insert data into MongDB
-
     return data
     # {'word': 'Utility bill', 'definition': ' A regular charge for services like electricity, water, or gas.'}
 
@@ -43,7 +41,6 @@ async def post_vocab(request: Request):
 # returns entire list of vocabulary terms 
 @app.get("/all_definitions/")
 async def definition_words():
-
     # return a list of vocabulary terms + definitions from the DB
     pass
 

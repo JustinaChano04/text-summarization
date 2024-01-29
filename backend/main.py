@@ -50,7 +50,6 @@ def parse_answer():
         def_dict.append(term_dict)
 
     return sample_response[:vocab_index], def_dict
-
     
 # if __name__ == "__main__":
 
