@@ -15,7 +15,7 @@ function useArticles(url) {
         setPosts1(data[0]);
         setPosts2(data[1]);
       });
-  }, []);
+  }, [url]);
   return {article,terms};
 }
 export default useArticles;
