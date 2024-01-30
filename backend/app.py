@@ -4,6 +4,7 @@ import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from pymongo import MongoClient
+from db_utils import db_insert, db_retrieve_all
 
 app =  FastAPI(swagger_ui_parameters={"syntaxHighlight": False})
 origins = [
@@ -34,15 +35,18 @@ async def root():
 async def post_vocab(request: Request):
     data = await request.json()
     # insert data into MongDB
-    return data
+    print(data)
+    db_insert(data)
     # {'word': 'Utility bill', 'definition': ' A regular charge for services like electricity, water, or gas.'}
 
 
 # returns entire list of vocabulary terms 
-@app.get("/all_definitions/")
+@app.get("/all_definitions")
 async def definition_words():
     # return a list of vocabulary terms + definitions from the DB
-    pass
+    terms = db_retrieve_all()
+    print(terms)
+    return terms
 
 
 

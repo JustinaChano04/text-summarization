@@ -27,8 +27,15 @@ def db_insert(word):
 # retrieve all vocabulary from the database  
 def db_retrieve_all():
     all_cursors = vocab_table.find()
-    return all_cursors
+    entries = []
+    for d in all_cursors:
+        term_dict = {}
+        term_dict['word'] = d['word']
+        term_dict['definition'] = d['definition']
+        entries.append(term_dict)
+    return entries
  
-# if __name__ == "__main__":
-#     db_insert('word')
-#     a = db_retrieve_all()
+if __name__ == "__main__":
+    # db_insert('word')
+    a = db_retrieve_all()
+    
