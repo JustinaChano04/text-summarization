@@ -51,8 +51,7 @@ def parse_answer():
 
     return sample_response[:vocab_index], def_dict
     
-# if __name__ == "__main__":
+if __name__ == "__main__":
 
-# #     # ret = get_articles(3, "Finance, Technology")
-# #     # # app = FastAPI()
-#     vocab = parse_answer()
+    ret = get_articles(3, "Elon Musk, Technology")
+    print(ret)

@@ -24,9 +24,11 @@ app.add_middleware(
 async def keywords(request: Request):
     keywords = await request.json()
     keywords = keywords['keywords']
-    print(keywords)
     articles = get_articles(3, keywords)
+
+    global summary_articles
     summary_articles = articles
+    
     return keywords
 
 
@@ -34,7 +36,6 @@ async def keywords(request: Request):
 @app.get("/articles")
 async def articles(request: Request):
     summary, definitions = parse_answer()
-    print(summary_articles)
     return summary_articles, definitions
 
 # 
@@ -49,9 +50,7 @@ async def post_vocab(request: Request):
 # returns entire list of vocabulary terms 
 @app.get("/all_definitions")
 async def definition_words():
-    # return a list of vocabulary terms + definitions from the DB
     terms = db_retrieve_all()
-    print(terms)
     return terms
 
 
