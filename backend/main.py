@@ -1,11 +1,14 @@
 import requests
 import json
-import config
+from dotenv import load_dotenv
 from fastapi import FastAPI
 import re
+import os
 
 
 def get_articles(articleCount, keyword):
+    load_dotenv()
+
     url = "http://eventregistry.org/api/v1/article/getArticles"
     headers = {
         "Content-Type": "application/json",
@@ -14,7 +17,7 @@ def get_articles(articleCount, keyword):
         "action": "getArticles",
         "keyword": keyword,
         "articlesCount": articleCount,
-        "apiKey": config.api_key,
+        "apiKey": os.getenv("NEWSAI_API_KEY"),
     }
 
     r = requests.request("post", url, headers=headers, data=json.dumps(body))

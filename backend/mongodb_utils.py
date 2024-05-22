@@ -1,12 +1,15 @@
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 import pdb
+from dotenv import load_dotenv
+import os
 
 
-url = open('db_link.txt', 'r')
-uri = url.read()
+load_dotenv()
+url= os.getenv("MONGO_URL")
+print(url)
 # Create a new client and connect to the server
-client = MongoClient(uri, server_api=ServerApi('1'))
+client = MongoClient(url, server_api=ServerApi('1'))
 my_db = client['financial_terms']
 
 # accessing a collection
@@ -18,7 +21,6 @@ try:
 except Exception as e:
     print(e)
 
-url.close()
 
 # inserting new vocabulary into the database
 def db_insert(word):    
