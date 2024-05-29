@@ -6,7 +6,7 @@ import pdb
 import json
 
 load_dotenv()
-
+client = None
 
 def retrieve_assistant(): 
   assistant_id = os.getenv("ASSISTANT_KEY")
@@ -34,7 +34,7 @@ def create_message(thread_id):
   thread_message = client.beta.threads.messages.create(
     thread_id=thread_id,
     role="user",
-    content="Help me summarize the article in the attachment. Additionally, identify 5 financial terms in the article that can help improve my financial literacy. Please format the five terms in a dictionary format where the key is the term and the value is the definition.",
+    content="Help me summarize the article in the attachment. Additionally, identify 5 financial terms in the article that can help improve my financial literacy. Your response MUST be in JSON format with the summary and list of definitions",
     attachments=[{"file_id": file.id, "tools": [{"type": "file_search"}]}]
   )
 
@@ -51,7 +51,7 @@ def run_thread(assistant, thread):
   )
   
   while run.status in ['queued', 'in_progress', 'cancelling']:
-    time.sleep(1) # Wait for 1 second
+    time.sleep(1)
     run = client.beta.threads.runs.retrieve(
       thread_id=thread.id,
       run_id=run.id
@@ -60,10 +60,22 @@ def run_thread(assistant, thread):
     messages = client.beta.threads.messages.list(
       thread_id=thread.id
     )
-    print(messages.data[0].content[0].text.value)
+    data = json.loads(messages.data[0].content[0].text.value)
+    with open("text_gpt_response.json", "w") as file:
+      json.dump(data, file)
+    
+    return file
       
   else:
     print(run.status)
+
+def initialize_gpt():
+  global client
+  client = OpenAI(api_key=os.getenv("OAI_API_KEY"))
+  assistant = retrieve_assistant()
+  thread = create_thread()
+  return assistant, thread
+
 
 if __name__ == "__main__":
   client = OpenAI(api_key=os.getenv("OAI_API_KEY"))
@@ -74,5 +86,6 @@ if __name__ == "__main__":
 
   thread = create_thread()
   messsage = create_message(thread.id)
-  run_thread(assistant, thread)
+  data = run_thread(assistant, thread)
+
  
