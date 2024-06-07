@@ -6,10 +6,9 @@ import pdb
 import json
 
 load_dotenv()
-client = None
 
 def retrieve_assistant(): 
-  assistant_id = os.getenv("ASSISTANT_KEY")
+  assistant_id = os.getenv("OAI_ASS_KEY")
   assistant = client.beta.assistants.retrieve(assistant_id)
   return assistant
 
@@ -30,7 +29,6 @@ def create_message(thread_id):
     file=open("test_article.txt", "rb"),
     purpose="assistants")
   
-  
   thread_message = client.beta.threads.messages.create(
     thread_id=thread_id,
     role="user",
@@ -38,10 +36,10 @@ def create_message(thread_id):
     attachments=[{"file_id": file.id, "tools": [{"type": "file_search"}]}]
   )
 
-  return thread_message
+  return file.id
                                                         
 
-def run_thread(assistant, thread):
+def run_thread(assistant, thread, file_id):
   '''
   Running a thread uses the model and tools associated with the Assistant to generate a response
   '''
@@ -61,10 +59,8 @@ def run_thread(assistant, thread):
       thread_id=thread.id
     )
     data = json.loads(messages.data[0].content[0].text.value)
-    with open("text_gpt_response.json", "w") as file:
-      json.dump(data, file)
-    
-    return file
+    client.files.delete(file_id)
+    return data
       
   else:
     print(run.status)
@@ -77,15 +73,15 @@ def initialize_gpt():
   return assistant, thread
 
 
-if __name__ == "__main__":
-  client = OpenAI(api_key=os.getenv("OAI_API_KEY"))
-  assistant = retrieve_assistant()
-  print(assistant)
-  with open('test_article.txt', 'rb') as fp:
-    content = fp.read()
+# if __name__ == "__main__":
+  # client = OpenAI(api_key=os.getenv("OAI_API_KEY"))
+  # assistant = retrieve_assistant()
+  # print(assistant)
+  # with open('test_article.txt', 'rb') as fp:
+  #   content = fp.read()
 
-  thread = create_thread()
-  messsage = create_message(thread.id)
-  data = run_thread(assistant, thread)
+  # thread = create_thread()
+  # messsage = create_message(thread.id)
+  # data = run_thread(assistant, thread)
 
  

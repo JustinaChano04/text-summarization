@@ -3,3 +3,8 @@ pytorch_model-00002-of-00003.bin
 pytorch_model-00003-of-00003.bin
 backend/db_link.txt
 backend/config.py
+backend/.env
+backend/article.txt
+backend/test_article.txt
+backend/test_prompt.txt
+backend/gpt_instructions.txt
