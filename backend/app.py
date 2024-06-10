@@ -43,7 +43,7 @@ async def articles(request: Request):
     for article in stored_articles:
         print(article["title"])
         with open("test_article.txt", "w") as fp:
-            fp.write(f"{article['title']} \n {article['body']}")
+            fp.write(f"Title: {article['title']} \n Article: {article['body']}")
 
         file_id = gpt.create_message(thread.id)
         data = gpt.run_thread(assistant, thread, file_id)

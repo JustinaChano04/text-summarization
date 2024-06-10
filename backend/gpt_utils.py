@@ -32,7 +32,7 @@ def create_message(thread_id):
   thread_message = client.beta.threads.messages.create(
     thread_id=thread_id,
     role="user",
-    content="Help me summarize the article in the attachment. Additionally, identify 5 financial terms in the article that can help improve my financial literacy. Your response MUST be in JSON format with the summary and list of definitions",
+    content="Help me summarize the article in the attachment. Additionally, identify 5 financial terms in the article that can help improve my financial literacy. Your response MUST be in JSON string format with the summary and list of definitions",
     attachments=[{"file_id": file.id, "tools": [{"type": "file_search"}]}]
   )
 
@@ -58,7 +58,8 @@ def run_thread(assistant, thread, file_id):
     messages = client.beta.threads.messages.list(
       thread_id=thread.id
     )
-    data = json.loads(messages.data[0].content[0].text.value)
+    # return messages.data[0].content[0].text.value
+    return(json.loads(messages.data[0].content[0].text.value))
     client.files.delete(file_id)
     return data
       

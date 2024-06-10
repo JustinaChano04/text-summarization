@@ -1,6 +1,7 @@
 import React from "react";
 import Vocab from "../../hooks/Vocab";
 import { useSnackbar } from "react-simple-snackbar";
+import "../../App.css";
 
 function AddWord({ word, definition }) {
   const [openSnackbar] = useSnackbar();
@@ -13,6 +14,7 @@ function AddWord({ word, definition }) {
     <div>
       <p>
         <button
+          className="vocab-button"
           onClick={() => {
             handleClick();
             Vocab(word, definition);
@@ -20,7 +22,7 @@ function AddWord({ word, definition }) {
         >
         ✅   
         </button>
-        <b>{' ' + word}</b> {definition}
+        <b>{' ' + word + ':'}</b> {definition}
       </p>
     </div>
   );

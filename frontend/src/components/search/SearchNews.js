@@ -4,7 +4,6 @@ import "../../App.css";
 
 function SearchNews() {
   const [searchInput, setSearchInput] = useState("");
-  const [searchSubmit, setSearchSubmit] = useState("");
   const handleChange = (e) => {
     e.preventDefault();
     setSearchInput(e.target.value);
@@ -28,5 +27,4 @@ function SearchNews() {
     </div>
   );
 }
-
 export default SearchNews;
