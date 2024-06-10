@@ -35,9 +35,8 @@ async def keywords(request: Request):
     stored_articles = []
     stored_articles = article
     
-    return keywords
+    return stored_articles
 
-# API endpoint to request articles from NewsAPI and parse prompt ChatGPT for summary and vocab definitions
 @app.get("/articles")
 async def articles(request: Request):
     prompt_response = []
